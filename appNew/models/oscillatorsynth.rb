@@ -1,0 +1,2 @@
+class Oscillatorsynth < ApplicationRecord
+end

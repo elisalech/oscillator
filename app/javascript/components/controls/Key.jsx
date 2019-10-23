@@ -1,9 +1,9 @@
-import classnames from "classnames";
-import React from "react";
+import classnames from 'classnames'
+import React from 'react'
 
 export default class Key extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   render() {
@@ -12,15 +12,16 @@ export default class Key extends React.Component {
       octave,
       currentNote,
       handleMouseUp,
-      handleMouseDown
-    } = this.props;
+      handleMouseDown,
+      playKey
+    } = this.props
 
     const classes = classnames({
       keyButton: true,
       pressed: note === currentNote,
-      black: note.lenght === 2,
-      white: note.lenght === 1
-    });
+      black: note.length === 2,
+      white: note.length === 1
+    })
 
     return (
       <div
@@ -29,8 +30,8 @@ export default class Key extends React.Component {
         onMouseDown={() => handleMouseDown(note, octave)}
         onMouseUp={handleMouseUp}
       >
-        {note}
+        {playKey}
       </div>
-    );
+    )
   }
 }

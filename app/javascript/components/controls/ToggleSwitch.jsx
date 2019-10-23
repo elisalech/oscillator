@@ -9,6 +9,7 @@ export default class ToggleSwitch extends React.Component {
 
   handleClick() {
     const { value } = this.props
+    console.log(value, 'toggle')
     this.props.handleClick(value)
   }
 

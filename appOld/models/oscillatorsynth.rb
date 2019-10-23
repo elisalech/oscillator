@@ -1,2 +1,0 @@
-class Oscillatorsynth < ApplicationRecord
-end

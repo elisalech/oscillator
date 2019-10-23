@@ -2,9 +2,9 @@ import React from 'react'
 import Tone from 'tone'
 
 import BpmSlider from '../components/controls/BpmSlider'
-// import RadioheadLooper from '../components/synthesizers/RadioheadLooper'
-// import AmbientSynth from '../components/synthesizers/AmbientSynth'
+import RadioheadLooper from '../components/synthesizers/RadioheadLooper'
 import KeySynth from '../components/synthesizers/KeySynth'
+import AmbientSynth from '../components/synthesizers/AmbientSynth'
 
 export default class Synth extends React.Component {
   constructor(props) {
@@ -43,6 +43,12 @@ export default class Synth extends React.Component {
           max="220"
           value={bpm}
           handleValueChange={this.bpmChange}
+        />
+        <RadioheadLooper />
+        <AmbientSynth
+          handleViewChange={this.handleViewChange}
+          viewSet={viewSet}
+          bpm={bpm}
         />
         <KeySynth handleViewChange={this.handleViewChange} viewSet={viewSet} />
       </div>

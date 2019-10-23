@@ -2,8 +2,8 @@ import _ from 'lodash'
 import React from 'react'
 import Tone from 'tone'
 
-import * as effects from '../../tunes/effects'
-import * as synths from '../../tunes/synths'
+// import * as effects from '../../tunes/effects'
+// import * as synths from '../../tunes/synths'
 
 import Keyboard from '../controls/Keyboard'
 import Pedalboard from '../effects/Pedalboard'
@@ -18,7 +18,7 @@ export default class KeySynth extends React.Component {
 
     let keySynth = new Tone.Synth({
       oscillator: {
-        type: 'triangle'
+        type: 'sine'
       },
       envelope: {
         attack: 2,
@@ -260,12 +260,6 @@ export default class KeySynth extends React.Component {
           handleEnvelope={this.handleEnvelope}
           env={this.state.keySynth.envelope}
           name="keySynth"
-        />
-        <Pedalboard
-          synth={this.state}
-          handler={this.handleValueChange}
-          subHandler={this.handleSubValueChange}
-          toggleEffect={this.toggleEffect}
         />
       </div>
     )

@@ -92,7 +92,7 @@ export default class BpmSlider extends React.Component {
 
       this.setState({
         thumb: {
-          left: thumbLeft
+          left: thumbLeft - 15
         }
       })
     }
@@ -121,7 +121,7 @@ export default class BpmSlider extends React.Component {
     const { left } = this.state.thumb
 
     const style = {
-      transform: `translateX(${left}px)`
+      transform: `translate(${left}px, -15px)`
     }
 
     return (

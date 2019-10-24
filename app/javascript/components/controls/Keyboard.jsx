@@ -6,6 +6,7 @@ import Octaves from './Octaves'
 import ButtonSet from './ButtonSet'
 import Key from './Key'
 import KeyboardListener from './KeyboardListener'
+import Slider from './Slider'
 
 export default class Keyboard extends React.Component {
   constructor(props) {
@@ -60,25 +61,47 @@ export default class Keyboard extends React.Component {
     })
 
     return (
-      <div className="keyboard-container">
-        <KeyboardListener
-          handleMouseDown={handleMouseDown}
-          handleMouseUp={handleMouseUp}
-          octave={octave}
-        />
-        <h1>Keyboard</h1>
-        <div className="keyboard">
-          {keys}
-          <Octaves value={octave} min="0" max="6" changeOct={this.changeOct} />
+      <div className="keySynth">
+        <div className="keyContainer">
+          <KeyboardListener
+            handleMouseDown={handleMouseDown}
+            handleMouseUp={handleMouseUp}
+            octave={octave}
+          />
+
+          <div className="keyboard">{keys}</div>
         </div>
-        <h3>Wave Type</h3>
-        <ButtonSet
-          name={name}
-          property="type"
-          set={set}
-          value={typeValue}
-          handleValueChange={changeWaveType}
-        />
+
+        <div className="keyPresets">
+          <div className="keyControls">
+            <div className="keyVolume">
+              <h1>Volume</h1>
+              <Slider
+                name="vol"
+                min="0"
+                max="1"
+                value={this.props.gain}
+                handleValueChange={this.props.handleVolume}
+              />
+            </div>
+            <Octaves
+              value={octave}
+              min="0"
+              max="6"
+              changeOct={this.changeOct}
+            />
+          </div>
+
+          <div className="keyWaves">
+            <ButtonSet
+              name={name}
+              property="type"
+              set={set}
+              value={typeValue}
+              handleValueChange={changeWaveType}
+            />
+          </div>
+        </div>
       </div>
     )
   }

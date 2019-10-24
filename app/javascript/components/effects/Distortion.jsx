@@ -26,37 +26,40 @@ export default class Distortion extends React.Component {
   render() {
     let value = this.props.value
     return (
-      <div className="filter distortion">
-        <div className="row">
-          <ToggleSwitch
-            current={this.props.on}
-            handleClick={this.props.toggleEffect}
-            value="distortion"
-          />
-          <Knob
-            name="distortion"
-            paramName="wet"
-            min={1}
-            max={100}
-            increment={100}
-            initialDeg={-45}
-            overDeg={270}
-            value={value.wet.value}
-            handleValueChange={this.props.handler}
-          />
-        </div>
-        <div className="row">
-          <Knob
-            name="distortion"
-            paramName="distortion"
-            min={1}
-            max={100}
-            increment={1}
-            initialDeg={-45}
-            overDeg={270}
-            value={value.distortion}
-            handleValueChange={this.props.handler}
-          />
+      <div className="Effect">
+        <h1>Distortion</h1>
+
+        <ToggleSwitch
+          current={this.props.on}
+          handleClick={this.props.toggleEffect}
+          value="distortion"
+        />
+        <Knob
+          name="distortion"
+          paramName="wet"
+          min={1}
+          max={100}
+          increment={100}
+          initialDeg={-45}
+          overDeg={270}
+          value={value.wet.value}
+          handleValueChange={this.props.handler}
+        />
+
+        <div className="controlsContainer">
+          <div className="row">
+            <Knob
+              name="distortion"
+              paramName="distortion"
+              min={1}
+              max={100}
+              increment={1}
+              initialDeg={-45}
+              overDeg={270}
+              value={value.distortion}
+              handleValueChange={this.props.handler}
+            />
+          </div>
           <Picker
             current={value.oversample}
             items={['none', '2x', '4x']}

@@ -2,9 +2,6 @@ import _ from 'lodash'
 import React from 'react'
 import Tone from 'tone'
 
-import * as effects from '../../tunes/effects'
-import * as synths from '../../tunes/synths'
-
 import Pedalboard from '../effects/Pedalboard'
 import EnvelopeAmb from '../controls/EnvelopeAmb'
 import Knob from '../controls/Knob'
@@ -103,7 +100,7 @@ export default class AmbientSynth extends React.Component {
 
     let loop1 = new Tone.Loop(time => {
       ambSynth1.triggerAttackRelease(tuneNow[0], '2n', time)
-    }, '4n')
+    }, '8n')
 
     let loop2 = new Tone.Loop(time => {
       ambSynth2.triggerAttackRelease(tuneNow[1], '4n', time)
@@ -432,9 +429,8 @@ export default class AmbientSynth extends React.Component {
       }
     })
 
-    Tone.Transport.bpm.value = bpm
+    Tone.Transport.bpm.value = this.props.bpm
     Tone.Transport.start()
-    console.log('start bpm', Tone.Transport.bpm.value)
   }
 
   render() {
@@ -454,64 +450,99 @@ export default class AmbientSynth extends React.Component {
       loop6,
       loop7
     } = this.state
+
     return (
       <div className="AmbientSynth">
-        <div className="loops">
-          Toggle Loop 1
-          <PlaySwitch
-            name="play"
-            value={loop1.on}
-            handleToggleClick={() => this.toggleLoop('loop1')}
-          />
-          Toggle Loop 2
-          <PlaySwitch
-            name="play"
-            value={loop2.on}
-            handleToggleClick={() => this.toggleLoop('loop2')}
-          />
-          Toggle Loop 3
-          <PlaySwitch
-            name="play"
-            value={loop3.on}
-            handleToggleClick={() => this.toggleLoop('loop3')}
-          />
-          Toggle Loop 4
-          <PlaySwitch
-            name="play"
-            value={loop4.on}
-            handleToggleClick={() => this.toggleLoop('loop4')}
-          />
-          Toggle Loop 5
-          <PlaySwitch
-            name="play"
-            value={loop5.on}
-            handleToggleClick={() => this.toggleLoop('loop5')}
-          />
-          Toggle Loop 6
-          <PlaySwitch
-            name="play"
-            value={loop6.on}
-            handleToggleClick={() => this.toggleLoop('loop6')}
-          />
-          Toggle Loop 7
-          <PlaySwitch
-            name="play"
-            value={loop7.on}
-            handleToggleClick={() => this.toggleLoop('loop7')}
-          />
+        <div className="ambientFirstRow">
+          <div className="ambientLoops">
+            <div className="mainControls">
+              <div className="volume">
+                <h2>Volume</h2>
+                <Slider
+                  name="vol"
+                  min="0"
+                  max="1"
+                  value={this.state.gain.gain.value}
+                  handleValueChange={this.handleVolume}
+                />
+              </div>
+            </div>
+
+            <div className="loops">
+              <div className="loop loop1">
+                <h2>Loop 1</h2>
+                <PlaySwitch
+                  name="play"
+                  value={loop1.on}
+                  handleToggleClick={() => this.toggleLoop('loop1')}
+                />
+              </div>
+
+              <div className="loop loop2">
+                <h2>Loop 2</h2>
+                <PlaySwitch
+                  name="play"
+                  value={loop2.on}
+                  handleToggleClick={() => this.toggleLoop('loop2')}
+                />
+              </div>
+
+              <div className="loop loop3">
+                <h2>Loop 3</h2>
+                <PlaySwitch
+                  name="play"
+                  value={loop3.on}
+                  handleToggleClick={() => this.toggleLoop('loop3')}
+                />
+              </div>
+
+              <div className="loop loop1">
+                <h2>Loop 4</h2>
+                <PlaySwitch
+                  name="play"
+                  value={loop4.on}
+                  handleToggleClick={() => this.toggleLoop('loop4')}
+                />
+              </div>
+
+              <div className="loop loop2">
+                <h2>Loop 5</h2>
+                <PlaySwitch
+                  name="play"
+                  value={loop5.on}
+                  handleToggleClick={() => this.toggleLoop('loop5')}
+                />
+              </div>
+
+              <div className="loop loop4">
+                <h2>Loop 6</h2>
+                <PlaySwitch
+                  name="play"
+                  value={loop6.on}
+                  handleToggleClick={() => this.toggleLoop('loop6')}
+                />
+              </div>
+
+              <div className="loop loop3">
+                <h2>Loop 7</h2>
+                <PlaySwitch
+                  name="play"
+                  value={loop7.on}
+                  handleToggleClick={() => this.toggleLoop('loop7')}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="ambientEnvelope">
+            <EnvelopeAmb
+              handleEnvelope={this.handleEnvelope}
+              env={this.state.ambSynth1.envelope}
+              name="ambSynth"
+            />
+          </div>
         </div>
-        <Slider
-          name="vol"
-          min="0"
-          max="1"
-          value={this.state.gain.gain.value}
-          handleValueChange={this.handleVolume}
-        />
-        <EnvelopeAmb
-          handleEnvelope={this.handleEnvelope}
-          env={this.state.ambSynth1.envelope}
-          name="ambSynth"
-        />
+
         <Pedalboard
           synth={this.state}
           handler={this.handleValueChange}

@@ -11,12 +11,16 @@ export default class Synth extends React.Component {
     super(props)
 
     this.state = {
-      bpm: 120,
+      bpm: 90,
       viewSet: 'keySynth'
     }
 
-    this.bpmChange = this.bpmChange.bind(this)
     this.handleViewChange = this.handleViewChange.bind(this)
+    this.bpmChange = this.bpmChange.bind(this)
+  }
+
+  handleViewChange(value) {
+    this.state.viewSet = value
   }
 
   bpmChange(value) {
@@ -30,27 +34,22 @@ export default class Synth extends React.Component {
     })
   }
 
-  handleViewChange(value) {
-    this.state.viewSet = value
-  }
-
   render() {
     let { bpm, viewSet } = this.state
     return (
-      <div className="main-synth">
-        <BpmSlider
-          min="0"
-          max="220"
-          value={bpm}
-          handleValueChange={this.bpmChange}
-        />
-        <RadioheadLooper />
-        <AmbientSynth
-          handleViewChange={this.handleViewChange}
-          viewSet={viewSet}
-          bpm={bpm}
-        />
-        <KeySynth handleViewChange={this.handleViewChange} viewSet={viewSet} />
+      <div className="app">
+        <div className="synthsContainer">
+          <RadioheadLooper bpmChange={this.bpmChange} bpm={bpm} />
+          <AmbientSynth
+            handleViewChange={this.handleViewChange}
+            viewSet={viewSet}
+            bpm={bpm}
+          />
+          <KeySynth
+            handleViewChange={this.handleViewChange}
+            viewSet={viewSet}
+          />
+        </div>
       </div>
     )
   }

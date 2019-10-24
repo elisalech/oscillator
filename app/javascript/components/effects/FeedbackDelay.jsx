@@ -24,6 +24,8 @@ export default class FeedbackDelay extends React.Component {
 
     return (
       <div className="Effect">
+        <h1>Feedback Delay</h1>
+
         <ToggleSwitch
           value="feedbackDelay"
           current={on}
